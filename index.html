@@ -1,43 +1,72 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-
+<head>
     <meta charset='utf-8'>
     <title>GaMuse</title>
     <link rel="stylesheet" href="style.css" />
-    </head>
+</head>
 
-    <body>
+<body>
 
     <div id="box">
         <div id="heading">
-
-            <a id="title" href="index.html">
-                ⌂ GaMuse
-            </a>
-
-            <div id="quote" >
+            <a id="title" href="index.html">⌂ GaMuse</a>
+            <div id="quote">
                 Looking for <b>the best</b> songs in industry
+            </div>
+        </div>
+    </div>
+
+    <div id="box2">
+        <div id="content">
+
+            <div class="panel first pad">
+                <span>This is a place for posts to appear</span>
+            </div>
+
+            <div class="panel pad">
+                <span>
+                <form action="/create" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="title" placeholder="Post title" required><br>
+                    <textarea name="content" placeholder="Post content" required></textarea><br>
+                    <input type="file" name="media"><br>
+                    <button type="submit">Create Post</button>
+                </form>
+                </span>
             </div>
 
         </div>
     </div>
 
-    <div id="box2">
-    <div id="content">
-
-        <div class="panel first pad">
-            <span>
-                This is a place for posts to appear
-            </span>
-        </div>
-    </div>
-    </div>
-
     <div id="credits">
         <div>Website by team<br>Kacper, Kamil i Eryk</div>
     </div>
-    </body>
+
+    <script>
+        // Fetch and display blog posts
+        fetch('/api/blogPosts')
+            .then(response => response.json())
+            .then(data => {
+                const contentDiv = document.querySelector('#content');
+                data.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.classList.add('panel', 'pad');
+                    postDiv.innerHTML = `
+                        <h2>${post.title}</h2>
+                        <p>${post.content}</p>
+                        <img src="/media/${post.media.id}" alt="Post Media">
+                        <form action="/api/blogPosts/${post.id}/comments" method="POST">
+                            <input type="text" name="author" placeholder="Your Name" required><br>
+                            <textarea name="content" placeholder="Comment" required></textarea><br>
+                            <button type="submit">Add Comment</button>
+                        </form>
+                        <hr>
+                    `;
+                    contentDiv.insertBefore(postDiv, contentDiv.firstChild);
+                });
+            });
+    </script>
+</body>
 
 </html>
