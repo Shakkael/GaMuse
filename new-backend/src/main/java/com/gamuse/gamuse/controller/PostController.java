@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gamuse.gamuse.model.Post;
 import com.gamuse.gamuse.service.PostService;
 
-@RestController("/")
+@RestController
 public class PostController {
+
     @Autowired
     PostService postService;
 
