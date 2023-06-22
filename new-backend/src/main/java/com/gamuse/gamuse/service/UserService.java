@@ -23,4 +23,39 @@ public class UserService {
         userRepository.findAll().forEach(user -> users.add(user));
         return users;
     }
+
+    public User getSingleUser(int userId) {
+        return userRepository.findById(userId).get();
+    }
+
+    public void updateUser(int userId, User updatedUser) {
+        String email, password, username = "";
+        User oldUser = userRepository.findById(userId).get();
+
+        if (updatedUser.getEmail() == "") {
+            email = oldUser.getEmail();
+        } else {
+            email = updatedUser.getEmail();
+        }
+        if (updatedUser.getUsername() == "") {
+            username = oldUser.getUsername();
+        } else {
+            username = updatedUser.getUsername();
+        }
+        if (updatedUser.getPassword() == "") {
+            password = oldUser.getPassword();
+        } else {
+            password = updatedUser.getPassword();
+        }
+
+        oldUser.setEmail(email);
+        oldUser.setUsername(username);
+        oldUser.setPassword(password);
+
+        userRepository.save(oldUser);
+    }
+
+    public void deleteUser(int userId) {
+        userRepository.deleteById(userId);
+    }
 }

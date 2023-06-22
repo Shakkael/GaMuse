@@ -3,66 +3,55 @@ package com.gamuse.gamuse.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gamuse.gamuse.helpers.ServerMessage;
 import com.gamuse.gamuse.model.Post;
 import com.gamuse.gamuse.service.PostService;
 
 @RestController
+@RequestMapping("/api")
 public class PostController {
 
     @Autowired
     PostService postService;
 
-    @GetMapping("/post")
-    private List<Post> getAllPosts() {
-        return postService.getAllPosts();
+    @GetMapping("/posts")
+    private ResponseEntity<List<Post>> getAllPosts() {
+        return new ResponseEntity<List<Post>>(postService.getAllPosts(), HttpStatus.OK);
     }
 
-    @GetMapping("/post/{postId}")
-    private Post getSinglePost(@PathVariable("postId") int postId) {
-        return postService.getSinglePost(postId);
+    @GetMapping("/posts/{postId}")
+    private ResponseEntity<Post> getSinglePost(@PathVariable("postId") int postId) {
+        return new ResponseEntity<Post>(postService.getSinglePost(postId), HttpStatus.OK);
     }
 
-    @PostMapping("/post")
-    private Post createPost(@RequestBody Post post) {
+    @PostMapping("/posts")
+    private ResponseEntity<ServerMessage> createPost(@RequestBody Post post) {
         postService.savePost(post);
-        return post;
+        return new ResponseEntity<ServerMessage>(new ServerMessage("Post created!", true), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/post/{postId}")
-    private int deletePost(@PathVariable("postId") int postId) {
+    @DeleteMapping("/posts/{postId}")
+    private ResponseEntity<ServerMessage> deletePost(@PathVariable("postId") int postId) {
         postService.deletePost(postId);
-        return postId;
+        return new ResponseEntity<ServerMessage>(new ServerMessage("Post " + postId + " deleted!", true),
+                HttpStatus.OK);
     }
 
-    @PutMapping("/post/{postId}")
-    private void editPost(@PathVariable("postId") int postId, @RequestBody Post editedPost) {
-        Post post = postService.getSinglePost(postId);
-        String title = "";
-        String content = "";
-
-        if (editedPost.getTitle() == "") {
-            title = post.getTitle();
-        } else {
-            title = editedPost.getTitle();
-        }
-
-        if (editedPost.getContent() == "") {
-            content = post.getContent();
-        } else {
-            content = editedPost.getContent();
-        }
-
-        post.setTitle(title);
-        post.setContent(content);
-
-        postService.savePost(post);
+    @PutMapping("/posts/{postId}")
+    private ResponseEntity<ServerMessage> editPost(@PathVariable("postId") int postId, @RequestBody Post editedPost) {
+        postService.editPost(postId, editedPost);
+        return new ResponseEntity<ServerMessage>(new ServerMessage("Post edited and saved!", true),
+                HttpStatus.OK);
     }
 }

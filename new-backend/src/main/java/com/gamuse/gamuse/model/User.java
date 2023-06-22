@@ -2,14 +2,16 @@ package com.gamuse.gamuse.model;
 
 import jakarta.persistence.*;
 
+//sadly User is some special name for H2Database
+
 @Entity
-@Table
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int userId;
+    private int id;
 
     @Column(unique = true)
     private String username;
@@ -20,12 +22,16 @@ public class User {
     @Column
     private String password;
 
+    public User() {
+
+    }
+
     public int getUserId() {
-        return this.userId;
+        return this.id;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.id = userId;
     }
 
     public String getUsername() {

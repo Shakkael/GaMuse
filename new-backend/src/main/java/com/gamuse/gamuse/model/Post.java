@@ -10,13 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "posts")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private int postId;
+    private int id;
 
     @Column
     private String title;
@@ -32,11 +32,11 @@ public class Post {
     }
 
     public int getPostId() {
-        return this.postId;
+        return this.id;
     }
 
     public void setPostId(int postId) {
-        this.postId = postId;
+        this.id = postId;
     }
 
     public String getTitle() {
