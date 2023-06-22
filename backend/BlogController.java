@@ -14,6 +14,11 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
+spring.h2.console.enabled=true
+spring.sql.init.platform=h2
+spring.datasource.url=jbdc:h2:mem:db
+spring.jpa.hibernate.ddl-auto=update
+
 @Controller
 public class BlogController {
     
