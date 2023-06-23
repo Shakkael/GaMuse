@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Oswald", sans-serif;
+}
+
+:root {
+  --light: rgb(74, 74, 74);
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.navbar {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgb(0, 102, 255), rgb(0, 195, 255));
+  box-shadow: 0 1px 3px black;
+}
+
+.universal-padding {
+  padding: 1rem 25%;
+}
+
+.main {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.postcard {
+  background-color: rgb(232, 232, 232);
+  padding: 2rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition-duration: 0.2s;
+  border: solid 1px rgb(166, 166, 166);
+}
+
+.postcard:hover {
+  box-shadow: 0px 0px 5px rgb(117, 117, 117);
+}
+
+.postcard__title {
+  font-size: 2rem;
+}
+
+.postcard__createdAt {
+  color: var(--light);
+}
+
+.postcard__content {
+  font-size: 1.3rem;
+}
+
+.postcard__commentnumber {
+}
+
+.singlepost {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post {
+  background-color: rgb(232, 232, 232);
+  padding: 2rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: solid 1px rgb(166, 166, 166);
+}
+
+.post__title {
+  font-size: 2rem;
+}
+
+.post__createdAt {
+  color: var(--light);
+}
+
+.post__content {
+  font-size: 1.3rem;
+}
+
+.comments {
+  padding: 1rem;
+  background-color: rgb(232, 232, 232);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 5px;
+  border: solid 1px rgb(166, 166, 166);
+}
+
+.comment {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: rgb(192, 192, 192);
+}
+
+dialog {
+  border: none;
+  gap: 1rem;
+  border-radius: 5px;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.673);
+}
+
+.modal {
+  width: 50%;
+  position: fixed;
+}
+
+.modal__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal__wrapper > a {
+  cursor: pointer;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.column > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__close {
+  font-size: 2rem;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.modal__close:hover {
+  color: rgb(153, 153, 153);
+}
+
+.modal__input,
+.modal__btn,
+.modal__textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.modal__textarea {
+  height: 20vh;
+  resize: none;
+}
+
+.plus {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.createcomment {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .universal-padding {
+    padding: 1rem 1rem;
+  }
+  .modal {
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .universal-padding {
+    padding: 1rem 1rem;
+  }
+  .modal {
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .universal-padding {
+    padding: 1rem 1rem;
+  }
+  .modal {
+  }
+}
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .universal-padding {
+    padding: 1rem 15%;
+  }
+  .modal {
+  }
+}
+@media (min-width: 1201px) and (max-width: 1500px) {
+  .universal-padding {
+    padding: 1rem 15%;
+  }
+  .modal {
+  }
+}
+@media (min-width: 1501px) {
+  .universal-padding {
+    padding: 1rem 25%;
+  }
+  .modal {
+  }
+}
