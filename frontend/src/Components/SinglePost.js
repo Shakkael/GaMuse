@@ -39,7 +39,6 @@ const SinglePost = () => {
           {new Date(post.createdAt).toLocaleString()}
         </p>
         <p className="post__content">{post.content}</p>
-        <p className="post__commentnumber">23 Comments</p>
       </div>
       <div className="comments">
         <h3>
