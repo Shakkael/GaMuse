@@ -49,7 +49,6 @@ public class PostService {
         } else {
             content = editedPost.getContent();
         }
-
         post.setTitle(title);
         post.setContent(content);
 

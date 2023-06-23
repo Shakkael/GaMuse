@@ -55,11 +55,11 @@ public class CommentService {
         return comments;
     }
 
-    public void editComment(int commentId,Comment comment){
+    public void editComment(int commentId, Comment comment) {
         Comment oldComment = commentRepository.findById(commentId).get();
         String content = "";
 
-        if(comment.getContent() == ""){
+        if (comment.getContent() == "") {
             content = oldComment.getContent();
         } else {
             content = comment.getContent();
@@ -72,5 +72,9 @@ public class CommentService {
 
     public void deleteComment(int postId) {
         commentRepository.deleteById(postId);
+    }
+
+    public List<Comment> findCommentsOfPost(int postId) {
+        return commentRepository.findAllCommentsByPostId(postId);
     }
 }

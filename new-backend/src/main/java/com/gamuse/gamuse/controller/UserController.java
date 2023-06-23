@@ -1,7 +1,9 @@
 package com.gamuse.gamuse.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gamuse.gamuse.helpers.Login;
 import com.gamuse.gamuse.helpers.ServerMessage;
 import com.gamuse.gamuse.model.User;
 import com.gamuse.gamuse.service.UserService;
@@ -33,11 +36,26 @@ public class UserController {
             return new ResponseEntity<ServerMessage>(new ServerMessage("User created!", true), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<ServerMessage>(new ServerMessage("Username or Email already taken", false),
-                    HttpStatus.NOT_ACCEPTABLE);
+                    HttpStatus.OK);
         }
     }
 
     // login
+    @PostMapping("/users/login")
+    private ResponseEntity loginUser(@RequestBody Login login) {
+        try {
+            User u = userService.findByEmail(login.getEmail());
+            if (u.getPassword().equals(login.getPassword())) {
+                return new ResponseEntity<User>(u, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<ServerMessage>(new ServerMessage("Invalid Credentials", false),
+                        HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<ServerMessage>(new ServerMessage("Invalid Credentials", false), HttpStatus.OK);
+        }
+
+    }
 
     // get all users
     @GetMapping("/users")

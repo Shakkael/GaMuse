@@ -48,13 +48,27 @@ public class CommentController {
         return new ResponseEntity<List<Comment>>(commentService.getUserComments(userId), HttpStatus.OK);
     }
 
-    @PostMapping("/posts/{postId}/users/{userId}/comment")
-    private ResponseEntity<ServerMessage> createComment(@PathVariable int postId, int userId,
-            @RequestBody Comment comment) {
-        comment.setUserId(userId);
-        comment.setPostId(postId);
+    /*
+     * try {
+     * Comment c = new Comment();
+     * 
+     * c.setUserId(userId);
+     * c.setPostId(postId);
+     * c.setContent(comment);
+     * 
+     * commentService.createComment(c);
+     * return new ResponseEntity<>(c, HttpStatus.OK);
+     * } catch (Exception e) {
+     * return new ResponseEntity<>(comment, HttpStatus.OK);
+     * }
+     * 
+     */
+    // create comment
+    @PostMapping("/comment")
+    private ResponseEntity createComment(@RequestBody Comment comment) {
         commentService.createComment(comment);
-        return new ResponseEntity<ServerMessage>(new ServerMessage("Comment created!", true), HttpStatus.OK);
+        return new ResponseEntity<>(comment, HttpStatus.OK);
+
     }
 
     @PutMapping("/comment/{commentId}")

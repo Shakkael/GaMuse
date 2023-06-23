@@ -19,7 +19,7 @@ public class Comment {
     @Column
     private int postId;
 
-    @Column
+    @Column(length = 10000)
     private String content;
 
     @Column
