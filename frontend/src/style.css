@@ -3,6 +3,25 @@
 * {
   box-sizing: border-box;
   font-family: "Oswald", sans-serif;
+  color: white;
+}
+
+html {
+  background-image: url(BackgroundImage.png);
+  background-size:180%;
+  background-position: 0;
+  animation: move 120s infinite cubic-bezier(0.6, 0.0, 0.0, 1);
+}
+@keyframes move {
+    0% {
+        background-position: 0;
+    }
+    50% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 0;
+    }
 }
 
 :root {
@@ -11,6 +30,9 @@
 
 body {
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(rgba(85,35,0,0.65),rgba(105,55,0,0.65));
 }
 
 h1,
@@ -25,7 +47,7 @@ p {
 }
 
 a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 
@@ -34,7 +56,7 @@ a {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
-  background: linear-gradient(to bottom, rgb(0, 102, 255), rgb(0, 195, 255));
+  background: linear-gradient(to bottom, rgba(175, 10, 5,0.5), rgb(255, 75, 25,0.5));
   box-shadow: 0 1px 3px black;
 }
 
